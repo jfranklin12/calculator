@@ -31,11 +31,12 @@ const Calculator = () => {
     }
 
     // decimal button function
-    // const handleDecBtnClick = () => {
-    //     if (!currentValue.includes(".")) {
-    //         setCurrentValue((prevState) => prevState + ".");
-    //     }
-    // };
+    const handleDecBtnClick = () => {
+        if (!currentValue.includes(".")) {
+            setCurrentValue((prevState) => prevState + ".");
+            setInput((prevInput => [...prevInput, "."]))
+        }
+    };
 
     // clear button function
     // const handleClrBtnClick = () => {
@@ -122,7 +123,7 @@ const Calculator = () => {
                 {/* equal button */}
                 {/* <Button key="equal" value="=" id="equals" onClick={handleEqualBtnClick} /> */}
                 {/* decimal button */}
-                {/* <Button key="decimal" value="." id="decimal" onClick={handleDecBtnClick} /> */}
+                <Button key="decimal" value="." id="decimal" onClick={handleDecBtnClick} />
 
             </div>
 
