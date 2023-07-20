@@ -14,7 +14,14 @@ const Calculator = () => {
         } else {
             setDisplayValue((prevState) => (prevState + number.toString()));
         }
-    };    
+    };
+
+    const handleDecBtnClick = () => {
+        if (!displayValue.includes(".")){
+            setDisplayValue((prevState) => prevState + ".");
+        }
+        
+    }
     
     // data for number buttons
     const numberButtons = [
@@ -46,7 +53,7 @@ const Calculator = () => {
                 {/* clear button */}
                 {/* equal button */}
                 {/* decimal button */}
-                <Button key="decimal" value="." id="decimal" onClick={handleNumBtnClick} />
+                <Button key="decimal" value="." id="decimal" onClick={handleDecBtnClick} />
 
             </div>
 
