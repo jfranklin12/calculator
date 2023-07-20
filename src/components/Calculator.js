@@ -45,7 +45,12 @@ const Calculator = () => {
             } else {
                 const lastEntry = input[input.length - 1];
                 if (isOperator(lastEntry)) {
-                    setInput((prevInput) => [...prevInput.slice(0, -1), operator]);
+                    if (operator === "-") {
+                        setInput((prevInput) => [...prevInput, operator]);
+                    } else {
+                        setInput((prevInput) => [...prevInput.slice(0, -1), operator]);
+                    }
+                    
                 } else {
                     setInput((prevInput) => [...prevInput, operator]);
                 }
@@ -53,7 +58,6 @@ const Calculator = () => {
             }
             setCurrentValue(operator);
             setOperator(operator);
-            console.log(operator);
         }
 
     }
@@ -84,7 +88,12 @@ const Calculator = () => {
 
             for (let i = 1; i < input.length; i += 2) {
                 const operator = input[i];
-                const nextNumber = parseFloat(input[i + 1]);
+                let nextNumber = parseFloat(input[i + 1]);
+
+                if (isOperator(operator) && isNaN(nextNumber)) {
+                    nextNumber = -parseFloat(input[i + 2]);
+                    i += 2;
+                }
 
                 switch (operator) {
                     case "+":
