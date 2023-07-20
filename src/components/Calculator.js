@@ -39,52 +39,56 @@ const Calculator = () => {
     };
 
     // clear button function
-    // const handleClrBtnClick = () => {
-    //     setCurrentValue("0");
-    //     setOperator("");
-    //     setPreviousValue(null);
-    //     setInput([]);
-    // };
+    const handleClrBtnClick = () => {
+        setCurrentValue("0");
+        setOperator("");
+        setInput([]);
+    };
 
     // equal button function
-    // const handleEqualBtnClick = () => {
-    //     if (previousValue !== null && operator !== "") {
-    //         setInput((preArray) => [...preArray, parseFloat(currentValue)]);
-    //         const result = calcResult();
-    //         setCurrentValue(result.toString());
-    //         setOperator("");
-    //         setPreviousValue(null);
-    //         setInput([]);            
-    //     }
-    // }
+    const handleEqualBtnClick = () => {
+        if (input.length > 0 && !isNaN(parseFloat(input[input.length - 1]))) {
+            const result = calcResult();
+            setInput((prevInput => [...prevInput, "=", result]));
+            setCurrentValue(result.toString());
+            setOperator("");
+        }
+    }
 
-    // const calcResult = () => {
-    //     var result = input[0];
-    //     for (var i = 1; i < input.length; i += 2) {
-    //         const operator = input[i];
-    //         const nextNumber = input[i + 1];
-    //         switch (operator) {
-    //             case "+":
-    //                 result += nextNumber;
-
-    //                 break;
-    //             case "-":
-    //                 result -= nextNumber;;
-    //                 break;
-    //             case "*":
-    //                 result *= nextNumber;
-    //                 break;
-    //             case "/":
-    //                 result /= nextNumber;
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-
-    //     }
-    //     return result;
-
-    // }
+    // calculate result
+    const calcResult = () => {
+        try {
+          let result = input.length > 0 ? parseFloat(input[0]) : 0;
+    
+          for (let i = 1; i < input.length; i += 2) {
+            const operator = input[i];
+            const nextNumber = parseFloat(input[i + 1]);
+    
+            switch (operator) {
+              case "+":
+                result += nextNumber;
+                break;
+              case "-":
+                result -= nextNumber;
+                break;
+              case "*":
+                result *= nextNumber;
+                break;
+              case "/":
+                result /= nextNumber;
+                break;
+              default:
+                break;
+            }
+          }
+    
+          return result;
+        } catch (error) {
+          // Handle any calculation errors, e.g., division by zero
+          console.error("Error during calculation:", error);
+          return "Error";
+        }
+      };
 
     // data for number buttons
     const numberButtons = [
@@ -119,9 +123,9 @@ const Calculator = () => {
                 <Button key="multiply" value="*" id="multiply" onClick={() => handleOpBtnClick("*")} />
                 <Button key="divide" value="/" id="divide" onClick={() => handleOpBtnClick("/")} />
                 {/* clear button */}
-                {/* <Button key="clear" value="AC" id="clear" onClick={handleClrBtnClick} /> */}
+                <Button key="clear" value="AC" id="clear" onClick={handleClrBtnClick} />
                 {/* equal button */}
-                {/* <Button key="equal" value="=" id="equals" onClick={handleEqualBtnClick} /> */}
+                <Button key="equal" value="=" id="equals" onClick={handleEqualBtnClick} />
                 {/* decimal button */}
                 <Button key="decimal" value="." id="decimal" onClick={handleDecBtnClick} />
 
