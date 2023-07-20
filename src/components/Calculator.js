@@ -7,6 +7,9 @@ const Calculator = () => {
     const [operator, setOperator] = useState("");
     const [input, setInput] = useState([]);
     const [isEqualClicked, setIsEqualClicked] = useState(false);
+    const isOperator = (value) => {
+        return ["+", "-", "*", "/"].includes(value);
+      };
 
     // number and decimal button function
     const handleNumAndDecBtnClick = (number) => {
@@ -40,10 +43,17 @@ const Calculator = () => {
                 setInput((prevInput) => [currentValue, operator]);
                 setIsEqualClicked(false);
             } else {
-                setInput((prevInput) => [...prevInput, operator]);
+                const lastEntry = input[input.length - 1];
+                if (isOperator(lastEntry)) {
+                    setInput((prevInput) => [...prevInput.slice(0, -1), operator]);
+                } else {
+                    setInput((prevInput) => [...prevInput, operator]);
+                }
+                
             }
             setCurrentValue(operator);
             setOperator(operator);
+            console.log(operator);
         }
 
     }
