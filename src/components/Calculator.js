@@ -20,7 +20,12 @@ const Calculator = () => {
         if (!displayValue.includes(".")){
             setDisplayValue((prevState) => prevState + ".");
         }
-        
+    }
+
+    const handleClrBtnClick = () => {
+        setDisplayValue("0");
+        setOperator("");
+        setPreviousValue(null);
     }
     
     // data for number buttons
@@ -46,11 +51,12 @@ const Calculator = () => {
             <div className="buttons">
                 {/* number buttons */}
                 {numberButtons.map(({ value, id }) => (
-                    <Button key={id} value={value} id={id} onClick={handleNumBtnClick}/>
+                    <Button key={id} value={value} id={id} onClick={handleNumBtnClick} />
                 ))}
                 
                 {/* operator buttons */}
                 {/* clear button */}
+                <Button key="clear" value="AC" id="clear" onClick={handleClrBtnClick} />
                 {/* equal button */}
                 {/* decimal button */}
                 <Button key="decimal" value="." id="decimal" onClick={handleDecBtnClick} />
