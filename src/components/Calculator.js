@@ -5,12 +5,11 @@ const Calculator = () => {
     // State for display value, operator, and store previous value
     const [currentValue, setCurrentValue] = useState("0");
     const [operator, setOperator] = useState("");
-    // const [previousValue, setPreviousValue] = useState(null);
     const [input, setInput] = useState([]);
     const [isEqualClicked, setIsEqualClicked] = useState(false);
 
-    // number button function
-    const handleNumBtnClick = (number) => {
+    // number and decimal button function
+    const handleNumAndDecBtnClick = (number) => {
         if (isEqualClicked) {
             setCurrentValue(number.toString());
             setInput([number.toString()]);
@@ -20,8 +19,17 @@ const Calculator = () => {
             setInput((prevInput) => [...prevInput, number.toString()]);
             setOperator("");
         } else {
-            setCurrentValue((prevState) => prevState + number.toString());
-            setInput((prevInput) => [...prevInput.slice(0, -1), prevInput[prevInput.length - 1] + number.toString()]);
+            const lastEntry = input[input.length - 1];
+            if (number === "." && lastEntry.includes(".")) {
+                return;
+            }
+            if (lastEntry.includes(".")) {
+                setCurrentValue((prevState) => prevState + number.toString());
+                setInput((prevInput) => [...prevInput.slice(0, -1), lastEntry + number.toString()]);
+            } else {
+                setCurrentValue((prevState) => prevState + number.toString());
+                setInput((prevInput) => [...prevInput.slice(0, -1), prevInput[prevInput.length - 1] + number.toString()]);
+            }
         }
     };
 
@@ -39,14 +47,6 @@ const Calculator = () => {
         }
 
     }
-
-    // decimal button function
-    const handleDecBtnClick = () => {
-        if (!currentValue.includes(".")) {
-            setCurrentValue((prevState) => prevState + ".");
-            setInput((prevInput => [...prevInput, "."]))
-        }
-    };
 
     // clear button function
     const handleClrBtnClick = () => {
@@ -96,7 +96,7 @@ const Calculator = () => {
 
             return result;
         } catch (error) {
-            // Handle any calculation errors, e.g., division by zero
+            // handle calculation errors
             console.error("Error during calculation:", error);
             return "Error";
         }
@@ -126,7 +126,7 @@ const Calculator = () => {
             <div className="buttons">
                 {/* number buttons */}
                 {numberButtons.map(({ value, id }) => (
-                    <Button key={id} value={value} id={id} onClick={() => handleNumBtnClick(value)} />
+                    <Button key={id} value={value} id={id} onClick={() => handleNumAndDecBtnClick(value)} />
                 ))}
 
                 {/* operator buttons */}
@@ -139,7 +139,7 @@ const Calculator = () => {
                 {/* equal button */}
                 <Button key="equal" value="=" id="equals" onClick={handleEqualBtnClick} />
                 {/* decimal button */}
-                <Button key="decimal" value="." id="decimal" onClick={handleDecBtnClick} />
+                <Button key="decimal" value="." id="decimal" onClick={handleNumAndDecBtnClick } />
 
             </div>
 
