@@ -7,7 +7,7 @@ const Calculator = () => {
     const [operator, setOperator] = useState("");
     const [previousValue, setPreviousValue] = useState(null);
 
-    // function for number button click
+    // number button function
     const handleNumBtnClick = (number) => {
         if (displayValue === "0") {
             setDisplayValue(number.toString());
@@ -16,17 +16,30 @@ const Calculator = () => {
         }
     };
 
+    // operator button function
+    const handleOpBtnClick = (operator) => {
+        if (previousValue !== null) {
+            // equal button function
+            console.log(operator);
+        }
+        setOperator(operator);
+        setPreviousValue(parseFloat(displayValue));
+        console.log(operator);
+    }
+
+    // decimal button function
     const handleDecBtnClick = () => {
         if (!displayValue.includes(".")){
             setDisplayValue((prevState) => prevState + ".");
         }
-    }
+    };
 
+    // clear button function
     const handleClrBtnClick = () => {
         setDisplayValue("0");
         setOperator("");
         setPreviousValue(null);
-    }
+    };
     
     // data for number buttons
     const numberButtons = [
@@ -55,6 +68,10 @@ const Calculator = () => {
                 ))}
                 
                 {/* operator buttons */}
+                <Button key="add" value="+" id="add" onClick={handleOpBtnClick} />
+                <Button key="subtract" value="-" id="subtract" onClick={handleOpBtnClick} />
+                <Button key="multiply" value="*" id="multiply" onClick={handleOpBtnClick} />
+                <Button key="divide" value="/" id="divide" onClick={handleOpBtnClick} />
                 {/* clear button */}
                 <Button key="clear" value="AC" id="clear" onClick={handleClrBtnClick} />
                 {/* equal button */}
