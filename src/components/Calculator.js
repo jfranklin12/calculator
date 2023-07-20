@@ -7,10 +7,15 @@ const Calculator = () => {
     const [operator, setOperator] = useState("");
     // const [previousValue, setPreviousValue] = useState(null);
     const [input, setInput] = useState([]);
+    const [isEqualClicked, setIsEqualClicked] = useState(false);
 
     // number button function
     const handleNumBtnClick = (number) => {
-        if (currentValue === "0" || operator !== "") {
+        if (isEqualClicked) {
+            setCurrentValue(number.toString());
+            setInput([number.toString()]);
+            setIsEqualClicked(false);
+        } else if (currentValue === "0" || operator !== "") {
             setCurrentValue(number.toString());
             setInput((prevInput) => [...prevInput, number.toString()]);
             setOperator("");
@@ -43,6 +48,7 @@ const Calculator = () => {
         setCurrentValue("0");
         setOperator("");
         setInput([]);
+        setIsEqualClicked(false);
     };
 
     // equal button function
@@ -52,6 +58,7 @@ const Calculator = () => {
             setInput((prevInput => [...prevInput, "=", result]));
             setCurrentValue(result.toString());
             setOperator("");
+            setIsEqualClicked(true);
         }
     }
 
