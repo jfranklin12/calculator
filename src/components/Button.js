@@ -1,6 +1,6 @@
 import React from "react";
 
-const NumberButton = ({ value, id, onClick }) => {
+const Button = ({ value, id, onClick }) => {
     return (
         <button id={id} onClick={() => onClick(value)}>
             {value}
@@ -8,4 +8,4 @@ const NumberButton = ({ value, id, onClick }) => {
     );
 };
 
-export default NumberButton;
+export default Button;

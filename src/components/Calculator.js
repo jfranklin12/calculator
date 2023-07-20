@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NumberButton from "./NumberButton";
+import Button from "./Button";
 
 const Calculator = () => {
     // State for display value, operator, and store previous value
@@ -10,9 +10,9 @@ const Calculator = () => {
     // function for number button click
     const handleNumBtnClick = (number) => {
         if (displayValue === "0") {
-            setDisplayValue(number);
+            setDisplayValue(number.toString());
         } else {
-            setDisplayValue((prevState) => (prevState.toString() + number.toString()));
+            setDisplayValue((prevState) => (prevState + number.toString()));
         }
     };    
     
@@ -39,13 +39,14 @@ const Calculator = () => {
             <div className="buttons">
                 {/* number buttons */}
                 {numberButtons.map(({ value, id }) => (
-                    <NumberButton key={id} value={value} id={id} onClick={handleNumBtnClick}/>
+                    <Button key={id} value={value} id={id} onClick={handleNumBtnClick}/>
                 ))}
                 
                 {/* operator buttons */}
                 {/* clear button */}
                 {/* equal button */}
                 {/* decimal button */}
+                <Button key="decimal" value="." id="decimal" onClick={handleNumBtnClick} />
 
             </div>
 
