@@ -42,7 +42,35 @@ const Calculator = () => {
             case "=":
                 handleEqualBtnClick();
                 break;
+            default:
+                break;
         }
+    };
+
+    // function for number button click
+    const handleNumBtnClick = (number) => {
+        if (displayValue === "0" || operator !== "") {
+            setDisplayValue(number);
+            setOperator("");
+        } else {
+            setDisplayValue((prevState) => prevState + number);
+        }
+    };
+
+    const handleOperatorBtnClick = () => {
+
+    };
+
+    const handleDecBtnClick = () => {
+
+    };
+
+    const handleClearBtnClick = () => {
+
+    };
+
+    const handleEqualBtnClick = () => {
+
     };
 
     
