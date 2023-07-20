@@ -7,73 +7,14 @@ const Calculator = () => {
     const [operator, setOperator] = useState("");
     const [previousValue, setPreviousValue] = useState(null);
 
-    // switch case for buttons
-    const handleButtonClick = (buttonValue) => {
-        // case for numbers
-        switch (buttonValue) {
-            case "0":
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-            case "5":
-            case "6":
-            case "7":
-            case "8":
-            case "9":
-                handleNumBtnClick(buttonValue);
-                break;
-            // case for operators
-            case "+":
-            case "-":
-            case "*":
-            case "/":
-                handleOperatorBtnClick(buttonValue);
-                break;
-            // case for decimals
-            case ".":
-                handleDecBtnClick();
-                break;
-            // case for clear
-            case "clear":
-                handleClearBtnClick();
-                break;
-            // case for equal
-            case "=":
-                handleEqualBtnClick();
-                break;
-            default:
-                break;
-        }
-    };
-
     // function for number button click
     const handleNumBtnClick = (number) => {
-        if (displayValue === "0" || operator !== "") {
+        if (displayValue === "0") {
             setDisplayValue(number);
-            setOperator("");
         } else {
-            setDisplayValue((prevState) => prevState + number);
+            setDisplayValue((prevState) => (prevState.toString() + number.toString()));
         }
-    };
-
-    const handleOperatorBtnClick = () => {
-
-    };
-
-    const handleDecBtnClick = () => {
-
-    };
-
-    const handleClearBtnClick = () => {
-
-    };
-
-    const handleEqualBtnClick = () => {
-
-    };
-
-    
+    };    
     
     // data for number buttons
     const numberButtons = [
@@ -98,7 +39,7 @@ const Calculator = () => {
             <div className="buttons">
                 {/* number buttons */}
                 {numberButtons.map(({ value, id }) => (
-                    <NumberButton key={id} value={value} id={id} onClick={handleButtonClick}/>
+                    <NumberButton key={id} value={value} id={id} onClick={handleNumBtnClick}/>
                 ))}
                 
                 {/* operator buttons */}
