@@ -1,0 +1,44 @@
+/* Color Palette */
+/* 
+Medium Blue #205b7a	(32,91,122)
+Light Blue #a2bbcf	(162,187,207)
+Dark Blue #142f44	(20,47,68)
+Grey #1d3849	(29,56,73)
+Black #000000	(0,0,0)
+*/
+
+:root {
+    --primary-color: rgb(32, 91, 122);
+    --secondary-color: rgb(162, 187, 207);
+    --dark-color: rgb(20, 47, 68);
+    --darker-color: rgb(29, 56, 73);
+    --black-color: rgb(0, 0, 0);
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--secondary-color);
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .calculator {
+    background-color: var(--dark-color);
+    border: 0.2rem solid var(--primary-color);
+    border-radius: 0.8rem;
+    width: 18rem;
+    padding: 1.25rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
