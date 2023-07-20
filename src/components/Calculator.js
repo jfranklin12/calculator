@@ -28,7 +28,12 @@ const Calculator = () => {
     // operator button function
     const handleOpBtnClick = (operator) => {
         if (input.length > 0) {
-            setInput((prevInput) => [...prevInput, operator])
+            if (isEqualClicked) {
+                setInput((prevInput) => [currentValue, operator]);
+                setIsEqualClicked(false);
+            } else {
+                setInput((prevInput) => [...prevInput, operator]);
+            }
             setCurrentValue(operator);
             setOperator(operator);
         }
@@ -65,37 +70,37 @@ const Calculator = () => {
     // calculate result
     const calcResult = () => {
         try {
-          let result = input.length > 0 ? parseFloat(input[0]) : 0;
-    
-          for (let i = 1; i < input.length; i += 2) {
-            const operator = input[i];
-            const nextNumber = parseFloat(input[i + 1]);
-    
-            switch (operator) {
-              case "+":
-                result += nextNumber;
-                break;
-              case "-":
-                result -= nextNumber;
-                break;
-              case "*":
-                result *= nextNumber;
-                break;
-              case "/":
-                result /= nextNumber;
-                break;
-              default:
-                break;
+            let result = input.length > 0 ? parseFloat(input[0]) : 0;
+
+            for (let i = 1; i < input.length; i += 2) {
+                const operator = input[i];
+                const nextNumber = parseFloat(input[i + 1]);
+
+                switch (operator) {
+                    case "+":
+                        result += nextNumber;
+                        break;
+                    case "-":
+                        result -= nextNumber;
+                        break;
+                    case "*":
+                        result *= nextNumber;
+                        break;
+                    case "/":
+                        result /= nextNumber;
+                        break;
+                    default:
+                        break;
+                }
             }
-          }
-    
-          return result;
+
+            return result;
         } catch (error) {
-          // Handle any calculation errors, e.g., division by zero
-          console.error("Error during calculation:", error);
-          return "Error";
+            // Handle any calculation errors, e.g., division by zero
+            console.error("Error during calculation:", error);
+            return "Error";
         }
-      };
+    };
 
     // data for number buttons
     const numberButtons = [
